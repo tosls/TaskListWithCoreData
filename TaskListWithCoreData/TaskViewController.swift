@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import CoreData
 
 class TaskViewController: UIViewController {
+    
+    var delegate: TaskViewContollerDelegate?
+    
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     private lazy var taskTextField: UITextField = {
         let textField = UITextField()
@@ -51,6 +56,7 @@ class TaskViewController: UIViewController {
         return button
     }()
     
+    // MARK: view did load
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +71,8 @@ class TaskViewController: UIViewController {
             view.addSubview(subview)
         }
     }
+    
+    // MARK: set constaints
     
     private func setConstraints() {
         taskTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -88,11 +96,25 @@ class TaskViewController: UIViewController {
             cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             cancelButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40)
         ])
-        
-        
     }
     
+    // MARK: work with data
+    
     @objc private func save() {
+        guard let entityDescription = NSEntityDescription.entity(forEntityName: "Task", in: context) else {return}
+        guard let task = NSManagedObject(entity: entityDescription, insertInto: context) as? Task else {return}
+        
+        task.name = taskTextField.text
+        
+        if context.hasChanges {
+            do {
+                try context.save()
+            }
+            catch let error {
+                print(error.localizedDescription)
+            }
+        }
+        delegate?.reloadData()
         dismiss(animated: true)
     }
     

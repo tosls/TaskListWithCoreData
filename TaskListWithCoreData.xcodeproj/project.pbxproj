@@ -59,8 +59,8 @@
 				193F42D726CD1B420090F402 /* AppDelegate.swift */,
 				193F42DB26CD1B420090F402 /* TaskListViewController.swift */,
 				193F42EE26CD24560090F402 /* TaskViewController.swift */,
-				193F42E326CD1B440090F402 /* Assets.xcassets */,
 				193F42E526CD1B440090F402 /* LaunchScreen.storyboard */,
+				193F42E326CD1B440090F402 /* Assets.xcassets */,
 				193F42E826CD1B440090F402 /* Info.plist */,
 				193F42E026CD1B420090F402 /* TaskListWithCoreData.xcdatamodeld */,
 			);
