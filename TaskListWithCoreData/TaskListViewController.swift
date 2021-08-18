@@ -13,7 +13,6 @@ class TaskListViewController: UITableViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        
         setupNavigationBar()
     }
     
@@ -46,7 +45,8 @@ class TaskListViewController: UITableViewController {
     }
     
     @objc private func addNewTask() {
-        
+        let newTaskVC = TaskViewController()
+        present(newTaskVC, animated: true)
     }
 }
 
